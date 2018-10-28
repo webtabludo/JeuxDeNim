@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +12,86 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="JeuxDeNim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yLu-WH-xWG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="366"/>
+                                <color key="backgroundColor" red="0.81490093469619751" green="0.9981805682182312" blue="0.82226318120956421" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choisir une ligne et un nombre d'alumette" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ne-f2-yMH">
+                                <rect key="frame" x="10" y="413" width="355" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Cd6-j3-7Tg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Numéro de ligne" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4PF-wc-dFU">
+                                <rect key="frame" x="20" y="451" width="130" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="TG2-Ik-FqJ"/>
+                                    <constraint firstAttribute="width" constant="130" id="rJ6-he-F3N"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre d'alumette" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RQw-t9-UW7">
+                                <rect key="frame" x="225" y="451" width="130" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6AC-sK-96D"/>
+                                    <constraint firstAttribute="width" constant="130" id="rbT-Hc-2z5"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pos-VN-XSd">
+                                <rect key="frame" x="110" y="569" width="155" height="48"/>
+                                <color key="backgroundColor" red="0.92974967749432846" green="0.9981805682182312" blue="0.43772052364197744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="33"/>
+                                <state key="normal" title="Valider"/>
+                                <connections>
+                                    <action selector="validerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8q6-jO-UHe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.81490093469619751" green="0.9981805682182312" blue="0.82226318120956421" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yLu-WH-xWG" secondAttribute="bottom" constant="281" id="32e-TU-l0d"/>
+                            <constraint firstItem="4PF-wc-dFU" firstAttribute="top" secondItem="8Ne-f2-yMH" secondAttribute="bottom" constant="8" id="77g-X2-74K"/>
+                            <constraint firstItem="pos-VN-XSd" firstAttribute="top" secondItem="4PF-wc-dFU" secondAttribute="bottom" constant="88" id="9Je-Om-zTC"/>
+                            <constraint firstItem="yLu-WH-xWG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Aqb-xb-gv0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RQw-t9-UW7" secondAttribute="trailing" constant="20" id="ArR-I7-g6b"/>
+                            <constraint firstItem="RQw-t9-UW7" firstAttribute="top" secondItem="8Ne-f2-yMH" secondAttribute="bottom" constant="8" id="BT8-N6-cer"/>
+                            <constraint firstItem="pos-VN-XSd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="110" id="CVl-F8-m9p"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pos-VN-XSd" secondAttribute="trailing" constant="110" id="EKZ-Ey-FHC"/>
+                            <constraint firstItem="yLu-WH-xWG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GBU-E1-bte"/>
+                            <constraint firstItem="4PF-wc-dFU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QUy-V3-6ol"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Ne-f2-yMH" secondAttribute="trailing" constant="10" id="UZa-p0-TdX"/>
+                            <constraint firstItem="yLu-WH-xWG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="klg-L2-jOu"/>
+                            <constraint firstItem="8Ne-f2-yMH" firstAttribute="top" secondItem="yLu-WH-xWG" secondAttribute="bottom" constant="27" id="tz1-y8-xxs"/>
+                            <constraint firstItem="8Ne-f2-yMH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="y4g-Da-BGr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pos-VN-XSd" secondAttribute="bottom" constant="50" id="zrN-mu-gPD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="lignTextField" destination="4PF-wc-dFU" id="n3b-Es-0wg"/>
+                        <outlet property="messageLabel" destination="8Ne-f2-yMH" id="Juh-Js-sn3"/>
+                        <outlet property="nbreAllumetteTextField" destination="RQw-t9-UW7" id="YKF-Wu-TGv"/>
+                        <outlet property="zoneTextView" destination="yLu-WH-xWG" id="nhP-BH-bsF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>
