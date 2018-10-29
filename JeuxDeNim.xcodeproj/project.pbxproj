@@ -12,7 +12,6 @@
 		828451B62185F75A00F6729F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 828451B42185F75A00F6729F /* Main.storyboard */; };
 		828451B82185F75C00F6729F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 828451B72185F75C00F6729F /* Assets.xcassets */; };
 		828451BB2185F75C00F6729F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 828451B92185F75C00F6729F /* LaunchScreen.storyboard */; };
-		828451C3218605C800F6729F /* LogiqueAffichage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828451C2218605C800F6729F /* LogiqueAffichage.swift */; };
 		828451C82186082200F6729F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828451C72186082200F6729F /* FirstViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +23,6 @@
 		828451B72185F75C00F6729F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		828451BA2185F75C00F6729F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		828451BC2185F75C00F6729F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		828451C2218605C800F6729F /* LogiqueAffichage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogiqueAffichage.swift; sourceTree = "<group>"; };
 		828451C72186082200F6729F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,7 +87,6 @@
 		828451C6218605DE00F6729F /* Modèles */ = {
 			isa = PBXGroup;
 			children = (
-				828451C2218605C800F6729F /* LogiqueAffichage.swift */,
 			);
 			name = "Modèles";
 			path = "Modèles";
@@ -167,7 +164,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				828451B32185F75A00F6729F /* ViewController.swift in Sources */,
-				828451C3218605C800F6729F /* LogiqueAffichage.swift in Sources */,
 				828451B12185F75A00F6729F /* AppDelegate.swift in Sources */,
 				828451C82186082200F6729F /* FirstViewController.swift in Sources */,
 			);
