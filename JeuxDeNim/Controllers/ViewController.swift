@@ -16,62 +16,43 @@ class ViewController: UIViewController {
     @IBOutlet weak var lignTextField: UITextField!
     @IBOutlet weak var nbreAllumetteTextField: UITextField!
     
-    var coordX: Int = 1
-    var coordY: Int = 32
+   
     var lignes: Int = 0
     var pyramide = ""
-    
+    var brain = Brain(unNombreDeLigne: 0, unNombreAlumettes: 0)
+    var listeArray:[[Character]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for i in 0...(lignes - 1) {
-        
-        pyramide.append(String(repeating: " ", count: coordY - i) + String(repeating: "l", count: coordX + (2 * i)) + String(repeating: " ", count: coordY - i) + "\n")
+        pyramide = brain.creationPyramide(nbreDeLignes: lignes).chaineCaractere
+        listeArray = brain.creationPyramide(nbreDeLignes: lignes).tableaux
         zoneTextView.text = pyramide
-            
-            // compte le nombre d'allumette
-//        let test = pyramide.components(separatedBy: "l")
-//        print(pyramide, test.count-1)
-        }
+        print(listeArray)
         
-        
-     
     }
-
+    
     @IBAction func validerAction(_ sender: UIButton) {
         
-        // Trouver la ligne sélectioné ( 65 caractères par lignes)
-        // si ligne 3 alors (3-1) * 65 va au début de la ligne
+        messageLabel.text = "Choisir une ligne et un nombre d'alumette"
+        
         if let nbrLigneSelect = Int(lignTextField.text!) {
             if let nbreAluSelect = Int(nbreAllumetteTextField.text!) {
-            
-            // Il faut vérifier qu'il reste assez d'alumettes
-            let startLigne = pyramide.index(pyramide.startIndex, offsetBy: ((nbrLigneSelect-1) * 65) + (65 - ((nbrLigneSelect-1) * 2) + 1)/2)
-            let endligne = pyramide.index(pyramide.startIndex, offsetBy: nbreAluSelect + ((nbrLigneSelect-1) * 65) + (65 - ((nbrLigneSelect-1) * 2) + 1)/2)
-            let laLigne = pyramide[startLigne...endligne]
-            let lRestant = laLigne.components(separatedBy: "l")
-            print(lRestant.count)
-            
-                                        if nbreAluSelect <= lRestant.count {
-            
-                                                    // Revoir la formule mais la solution est la !
-                                                    for i in 1...nbreAluSelect {
                 
-                let start = pyramide.index(pyramide.startIndex, offsetBy: ((nbrLigneSelect-1) * 65) + (65 - ((nbrLigneSelect-1) * 2) - 1)/2)
-                let end = pyramide.index(pyramide.startIndex, offsetBy: i + ((nbrLigneSelect-1) * 65) + (65 - ((nbrLigneSelect-1) * 2) - 1)/2)
+                // Il faut vérifier qu'il reste assez d'alumettes
                 
-            pyramide.replaceSubrange(start...end, with: " ")
-            //print(pyramide)
-            zoneTextView.text = pyramide
-            
-                                                                                }
-        // Faire jouer l'ordinateur
-                                        } else {
-                                            messageLabel.text = "Il ne reste pas assez d'alumettes"
+                if brain.countAlumettesDansLigne(tab: listeArray, nbrLigneSelect: nbrLigneSelect) >=  nbreAluSelect {
+                   listeArray = brain.effaceAlumettes(tab: listeArray, nbrAlumetteSelect: nbreAluSelect, nbrLigneSelect: nbrLigneSelect)
+                    let newArr = brain.miseAPlat(tab: listeArray)
+                   pyramide = String(newArr)
+                    zoneTextView.text = pyramide
+                    
+                    // Faire jouer l'ordinateur
+                } else {
+                    messageLabel.text = "Il ne reste pas assez d'alumettes"
                 }
-                                                                            }
-                                                                }
-                                                            }
-
+            }
+        }
+    }
+    
 }
