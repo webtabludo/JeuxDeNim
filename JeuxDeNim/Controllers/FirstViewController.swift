@@ -26,7 +26,7 @@ class FirstViewController: UIViewController {
     func testNbrLigne (nbreLigne: Int) {
         nbrLigne = nbreLigne
         if nbreLigne <= 14 {
-            performSegue(withIdentifier: "FirstSegue", sender: nil)
+            //performSegue(withIdentifier: "FirstSegue", sender: nil)
         } else {
             msgLigne.text = "14 lignes maximum !"
             msgLigne.textColor = UIColor.red
@@ -43,7 +43,7 @@ class FirstViewController: UIViewController {
             msgAllMax.textColor = UIColor.red
         }
     }
-            
+    
     
     
     
@@ -56,16 +56,17 @@ class FirstViewController: UIViewController {
             if let choixAll = Int(nbrAllMaxTextField.text!) {
                 testNbrLigne(nbreLigne: choixInt)
                 testAllMax(nbreAllMax: choixAll)
+
             } else {
                 msgAllMax.text = "Veuillez rentrer un nombre d'allumette valide !"
                 msgAllMax.textColor = UIColor.red
-
+                
             }
             
         } else {
             msgLigne.text = "Veuillez rentrer un nombre de ligne valide !"
             msgLigne.textColor = UIColor.red
-
+            
         }
     }
     
@@ -74,7 +75,9 @@ class FirstViewController: UIViewController {
         
         if segue.identifier == "FirstSegue" {
             let destVc = segue.destination as! ViewController
-            
+            print("nombre d'allumettes max3:\(nbrAllMax)")
+            print("nombre de linge3:\(nbrLigne)")
+
             destVc.lignes = nbrLigne
             destVc.AllMax = nbrAllMax
         }

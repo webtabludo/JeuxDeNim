@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     var pyramide = ""
     var brain = Brain(unNombreDeLigne: 0, unNombreAlumettes: 0)
     var listeArray:[[Character]] = []
+    var brainIA = BrainIA()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +29,20 @@ class ViewController: UIViewController {
         pyramide = brain.creationPyramide(nbreDeLignes: lignes).chaineCaractere
         listeArray = brain.creationPyramide(nbreDeLignes: lignes).tableaux
         zoneTextView.text = pyramide
-        print(listeArray)
         
+        
+
     }
+    
+    func aiPlay(tab: [[Character]], choixAllMax: Int)  {
+       listeArray = brainIA.choixIA(tab: listeArray, choixAllMax: AllMax)
+        
+        let newArr = brain.miseAPlat(tab: listeArray)
+        pyramide = String(newArr)
+        zoneTextView.text = pyramide
+    }
+    
+    
     
     @IBAction func validerAction(_ sender: UIButton) {
         
@@ -48,6 +60,10 @@ class ViewController: UIViewController {
                     zoneTextView.text = pyramide
                     
                     // Faire jouer l'ordinateur
+                    messageLabel.text = "A moi de jouer ..."
+                    aiPlay(tab: listeArray, choixAllMax: AllMax)
+                    
+                    
                 } else {
                     messageLabel.text = "Il ne reste pas assez d'alumettes"
                 }
