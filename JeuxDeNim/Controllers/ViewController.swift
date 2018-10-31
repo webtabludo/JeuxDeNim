@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lignTextField: UITextField!
     @IBOutlet weak var nbreAllumetteTextField: UITextField!
     
-   
+    var AllMax:Int = 0
     var lignes: Int = 0
     var pyramide = ""
     var brain = Brain(unNombreDeLigne: 0, unNombreAlumettes: 0)

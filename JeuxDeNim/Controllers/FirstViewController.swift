@@ -9,32 +9,64 @@
 import UIKit
 
 class FirstViewController: UIViewController {
-
-    @IBOutlet weak var msgErrorLabel: UILabel!
+    
+    
+    @IBOutlet weak var msgLigne: UILabel!
     @IBOutlet weak var nbrLigneTextField: UITextField!
+    @IBOutlet weak var msgAllMax: UILabel!
+    @IBOutlet weak var nbrAllMaxTextField: UITextField!
     
     var nbrLigne = 0
-    
+    var nbrAllMax = 0
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-
+    
+    func testNbrLigne (nbreLigne: Int) {
+        nbrLigne = nbreLigne
+        if nbreLigne <= 14 {
+            performSegue(withIdentifier: "FirstSegue", sender: nil)
+        } else {
+            msgLigne.text = "14 lignes maximum !"
+            msgLigne.textColor = UIColor.red
+        }
+    }
+    
+    
+    func testAllMax (nbreAllMax: Int) {
+        nbrAllMax = nbreAllMax
+        if nbreAllMax <= 27 {
+            performSegue(withIdentifier: "FirstSegue", sender: nil)
+        } else {
+            msgAllMax.text = "Veuillez rentrer un nombre de ligne valide !"
+            msgAllMax.textColor = UIColor.red
+        }
+    }
+            
+    
+    
+    
     @IBAction func validerAction(_ sender: UIButton) {
-
+        
         
         // Test si un nombre de ligne de type Int est rentré
         if let choixInt = Int(nbrLigneTextField.text!) {
-             nbrLigne = choixInt
-            // Test si ce nombre est bien inférieur à 200 alumettes
-            if choixInt <= 14 {
-                performSegue(withIdentifier: "FirstSegue", sender: nil)
+            
+            if let choixAll = Int(nbrAllMaxTextField.text!) {
+                testNbrLigne(nbreLigne: choixInt)
+                testAllMax(nbreAllMax: choixAll)
             } else {
-                msgErrorLabel.text = "14 lignes maximum !"
+                msgAllMax.text = "Veuillez rentrer un nombre d'allumette valide !"
+                msgAllMax.textColor = UIColor.red
+
             }
             
         } else {
-            msgErrorLabel.text = "Veuillez rentrer un nombre de ligne valide !" }
+            msgLigne.text = "Veuillez rentrer un nombre de ligne valide !"
+            msgLigne.textColor = UIColor.red
+
+        }
     }
     
     
@@ -42,9 +74,9 @@ class FirstViewController: UIViewController {
         
         if segue.identifier == "FirstSegue" {
             let destVc = segue.destination as! ViewController
-
+            
             destVc.lignes = nbrLigne
+            destVc.AllMax = nbrAllMax
         }
     }
- 
 }
