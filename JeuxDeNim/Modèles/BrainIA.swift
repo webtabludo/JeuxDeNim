@@ -39,15 +39,14 @@ class BrainIA {
         
         for index in 1...tab.count {
             laLigne = tab[index - 1]
-           // print("laligne au moment du comptage:\(laLigne)")
-          //  print("comptage:\(laLigne.count - 1)")
+            
             result.append(laLigne.count - 1)
         }
         
         return result
     }
     
-
+    
     
     
     
@@ -76,74 +75,75 @@ class BrainIA {
         return isPair
     }
     
-   
+    
+    
+    
+    
+    // Fonction efface alumettes
+    func effaceAlumettes(tab: [[Character]], choixAllMax: Int, indexDeLigne: Int, nbrAllLigne: Int) -> [[Character]] {
         
+        var listeArray: [[Character]] = tab
+        var laLigne = tab[indexDeLigne]
+        var y = 1
+        var x = 1
         
-        
-        // Fonction efface alumettes
-        func effaceAlumettes(tab: [[Character]], choixAllMax: Int, indexDeLigne: Int, nbrAllLigne: Int) -> [[Character]] {
-            
-            var listeArray: [[Character]] = tab
-            var laLigne = tab[indexDeLigne]
-            var y = 1
-            var x = 1
-            
-            for (index, char) in laLigne.enumerated() {
-                if char == "l" && y <= choixAllMax && x <= nbrAllLigne {
-                    laLigne.remove(at: index)
-                    y += 1
-                    x += 1
-                  //  print("laligne apres remove IA:\(laLigne)")
-                } else {
-                  //  print("plus d'allumettes pour IA")
-                }
+        for (_, char) in laLigne.enumerated() {
+            if char == "l" && y <= choixAllMax && x <= nbrAllLigne {
+                laLigne.remove(at: 0)
+                y += 1
+                x += 1
+               
+            } else {
+                  print("plus d'allumettes pour IA")
             }
-            listeArray.remove(at: indexDeLigne)
-            listeArray.insert(laLigne, at: indexDeLigne)
-            return listeArray
         }
+        listeArray.remove(at: indexDeLigne)
+        listeArray.insert(laLigne, at: indexDeLigne)
         
-        
-  
+        return listeArray
+    }
+    
+    
+    
     
     
     func choixIA (tab: [[Character]], choixAllMax: Int) -> [[Character]] {
         
         let tabQuant = countLignes(tab: tab)
-      //  print("tabQuant:\(tabQuant)")
         
         var listeArray: [[Character]] = tab
         var y = 0
         var x = 1
         var isPair = false
         for (i,chiffre) in tabQuant.enumerated() {
+            
             isPair = parité(num: chiffre)
-           // print("isPair:\(isPair)")
-            //print(tabQuant.count)
+          
             
             if isPair == false && y < 1 {
-                                        listeArray = effaceAlumettes(tab: tab, choixAllMax: choixAllMax, indexDeLigne: i, nbrAllLigne: chiffre)
-                                        y += 1
-                                        x += 1
-
-                                        } else if (isPair == true && x < tabQuant.count) {
-                                                                                            print("isPair:\(isPair)")
-                                                                                            print(tabQuant.count)
-                                                                                            print("x:\(x)")
-                                                                                            x += 1
+                listeArray = effaceAlumettes(tab: tab, choixAllMax: choixAllMax, indexDeLigne: i, nbrAllLigne: chiffre)
+                y += 1
+                x += 1
+               
                 
-                                                                                            } else {
-                                                                                                    print("do it")
-                                                                                                    listeArray = effaceAlumettes(tab: tab, choixAllMax: choixAllMax, indexDeLigne: i, nbrAllLigne: chiffre)
-                                                                                                    }
+            } else if (isPair == true && x < tabQuant.count) {
+              
+                x += 1
+                
+            }
             
-                                                    }
-                                                        return listeArray
-                                                                    }
-    
-    
+        }
+        
+        if listeArray == tab {
+            for (i,chiffre) in tabQuant.enumerated() {
+                listeArray = effaceAlumettes(tab: tab, choixAllMax: 1, indexDeLigne: i, nbrAllLigne: chiffre)
+                
+            }
+            
+        }
+        return listeArray
+    }
+
 }
-
-
 
 

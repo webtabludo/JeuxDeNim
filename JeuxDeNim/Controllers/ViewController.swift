@@ -48,14 +48,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     // Faire disparaitre le clavier après appui sur return
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
     }
     
     // Faire disparaitre le clavier après appui en dehors de la zone de textField
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+        self.zoneTextView.endEditing(true)
     }
     
     @IBAction func validerAction(_ sender: UIButton) {
@@ -64,7 +67,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         if let nbrLigneSelect = Int(lignTextField.text!) {
             if let nbreAluSelect = Int(nbreAllumetteTextField.text!) {
-                
+                if nbreAluSelect <= AllMax {
                 // Il faut vérifier qu'il reste assez d'alumettes
                 
                 if brain.countAlumettesDansLigne(tab: listeArray, nbrLigneSelect: nbrLigneSelect) >=  nbreAluSelect {
@@ -75,11 +78,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                    pyramide = String(newArr)
                     zoneTextView.text = pyramide
                     
-                    // Faire jouer l'ordinateur
-                    //messageLabel.text = "A moi de jouer ..."
-                   // print("debut")
-                  //  print(listeArray)
-                    //sleep(2)
+                    
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 
@@ -87,12 +86,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         self.messageLabel.text = "A vous de jouer ..."
 
                     }
+                    }
                    
-                    //aiPlay(tab: listeArray, choixAllMax: AllMax)
-                  //  print("after")
-                    //messageLabel.text = "A vous de jouer ..."
                 } else {
-                    messageLabel.text = "Il ne reste pas assez d'alumettes"
+                    messageLabel.text = "Il ne reste pas assez d'alumettes ou le nombre max est dépassé"
                 }
             }
         }

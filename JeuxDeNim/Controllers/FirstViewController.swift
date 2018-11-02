@@ -88,8 +88,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         
         if segue.identifier == "FirstSegue" {
             let destVc = segue.destination as! ViewController
-            // print("nombre d'allumettes max3:\(nbrAllMax)")
-            // print("nombre de linge3:\(nbrLigne)")
+            
             
             destVc.lignes = nbrLigne
             destVc.AllMax = nbrAllMax

@@ -63,7 +63,7 @@ class Brain {
             if l == "l" {
                 counter += 1
             } else {
-              //  print("vide")
+                print("vide")
             }
         }
         return counter
@@ -77,16 +77,18 @@ class Brain {
         var laLigne = tab[nbrLigneSelect - 1]
         var y = 1
         
-        for (index, char) in laLigne.enumerated() {
+        for (_, char) in laLigne.enumerated() {
             if char == "l" && y <= nbrAlumetteSelect {
-                laLigne.remove(at: index)
+                
+                laLigne.remove(at: 0)
                 y += 1
             } else {
-               // print("pas d'allumettes")
+                print("pas d'allumettes")
             }
         }
         listeArray.remove(at: nbrLigneSelect - 1)
         listeArray.insert(laLigne, at: nbrLigneSelect - 1)
+        
         return listeArray
     }
     
