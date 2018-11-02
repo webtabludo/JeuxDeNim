@@ -63,7 +63,7 @@ class Brain {
             if l == "l" {
                 counter += 1
             } else {
-                print("vide")
+              //  print("vide")
             }
         }
         return counter
@@ -81,9 +81,8 @@ class Brain {
             if char == "l" && y <= nbrAlumetteSelect {
                 laLigne.remove(at: index)
                 y += 1
-                print("laligne:\(laLigne)")
             } else {
-                print("pas d'allumettes")
+               // print("pas d'allumettes")
             }
         }
         listeArray.remove(at: nbrLigneSelect - 1)

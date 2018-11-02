@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var messageLabel: UILabel!
@@ -26,6 +26,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        lignTextField.delegate = self
+        nbreAllumetteTextField.delegate = self
+        
         pyramide = brain.creationPyramide(nbreDeLignes: lignes).chaineCaractere
         listeArray = brain.creationPyramide(nbreDeLignes: lignes).tableaux
         zoneTextView.text = pyramide
@@ -34,7 +37,8 @@ class ViewController: UIViewController {
 
     }
     
-    func aiPlay(tab: [[Character]], choixAllMax: Int)  {
+     func aiPlay(tab: [[Character]], choixAllMax: Int)  {
+        
        listeArray = brainIA.choixIA(tab: listeArray, choixAllMax: AllMax)
         
         let newArr = brain.miseAPlat(tab: listeArray)
@@ -43,6 +47,16 @@ class ViewController: UIViewController {
     }
     
     
+    // Faire disparaitre le clavier après appui sur return
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
+    // Faire disparaitre le clavier après appui en dehors de la zone de textField
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     @IBAction func validerAction(_ sender: UIButton) {
         
@@ -55,15 +69,28 @@ class ViewController: UIViewController {
                 
                 if brain.countAlumettesDansLigne(tab: listeArray, nbrLigneSelect: nbrLigneSelect) >=  nbreAluSelect {
                    listeArray = brain.effaceAlumettes(tab: listeArray, nbrAlumetteSelect: nbreAluSelect, nbrLigneSelect: nbrLigneSelect)
+                    messageLabel.text = "A moi de jouer ..."
+
                     let newArr = brain.miseAPlat(tab: listeArray)
                    pyramide = String(newArr)
                     zoneTextView.text = pyramide
                     
                     // Faire jouer l'ordinateur
-                    messageLabel.text = "A moi de jouer ..."
-                    aiPlay(tab: listeArray, choixAllMax: AllMax)
+                    //messageLabel.text = "A moi de jouer ..."
+                   // print("debut")
+                  //  print(listeArray)
+                    //sleep(2)
                     
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+
+                        self.aiPlay(tab: self.listeArray, choixAllMax: self.AllMax)
+                        self.messageLabel.text = "A vous de jouer ..."
+
+                    }
+                   
+                    //aiPlay(tab: listeArray, choixAllMax: AllMax)
+                  //  print("after")
+                    //messageLabel.text = "A vous de jouer ..."
                 } else {
                     messageLabel.text = "Il ne reste pas assez d'alumettes"
                 }
