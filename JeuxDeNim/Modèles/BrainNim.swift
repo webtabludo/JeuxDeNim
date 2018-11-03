@@ -9,7 +9,7 @@
 import UIKit
 
 class Brain {
-    
+    var viewController = ViewController()
     private var _unNombreDeLigne: Int
     private var _unNombreAlumettes: Int
     
@@ -82,6 +82,7 @@ class Brain {
                 
                 laLigne.remove(at: 0)
                 y += 1
+                
             } else {
                 print("pas d'allumettes")
             }
@@ -104,5 +105,23 @@ class Brain {
         }
         return newArr
     }
+   
+    
+ 
+    
+    // Fonction popup Alert fin de jeu
+    
+//    func alerte() {
+//        
+//        let msgIAWinner = "J'ai Gagné"
+//        let msgPlayerWinner = "Vous avez Gagné"
+//        
+//        let alert = UIAlertController(title: "Game Over", message: msgIAWinner, preferredStyle: .alert)
+//        let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
+//            let viewControllerYouWantToPresent = UIStoryboard?.instantiateViewController(withIdentifier: "FirstViewController")
+//            self.present(viewControllerYouWantToPresent!, animated: true, completion: nil)
+//            
+//        }
+//    }
     
 }

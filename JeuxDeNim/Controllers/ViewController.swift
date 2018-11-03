@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var zoneTextView: UITextView!
+    @IBOutlet weak var zoneTextView: UILabel!
     @IBOutlet weak var lignTextField: UITextField!
     @IBOutlet weak var nbreAllumetteTextField: UITextField!
     
@@ -67,11 +67,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         if let nbrLigneSelect = Int(lignTextField.text!) {
             if let nbreAluSelect = Int(nbreAllumetteTextField.text!) {
-                if nbreAluSelect <= AllMax {
+                
                 // Il faut vérifier qu'il reste assez d'alumettes
                 
-                if brain.countAlumettesDansLigne(tab: listeArray, nbrLigneSelect: nbrLigneSelect) >=  nbreAluSelect {
-                   listeArray = brain.effaceAlumettes(tab: listeArray, nbrAlumetteSelect: nbreAluSelect, nbrLigneSelect: nbrLigneSelect)
+                if brain.countAlumettesDansLigne(tab: listeArray, nbrLigneSelect: nbrLigneSelect) >=  nbreAluSelect && nbreAluSelect <= AllMax {
+                    listeArray = brain.effaceAlumettes(tab: listeArray, nbrAlumetteSelect: nbreAluSelect,nbrLigneSelect: nbrLigneSelect)
                     messageLabel.text = "A moi de jouer ..."
 
                     let newArr = brain.miseAPlat(tab: listeArray)
@@ -86,7 +86,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         self.messageLabel.text = "A vous de jouer ..."
 
                     }
-                    }
+                    
                    
                 } else {
                     messageLabel.text = "Il ne reste pas assez d'alumettes ou le nombre max est dépassé"
@@ -95,4 +95,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+     // Fonction retour à la first view
+//    func reload() {
+//        let viewControllerYouWantToPresent = storyboard?.instantiateViewController(withIdentifier: "FirstViewController")
+//        self.present(viewControllerYouWantToPresent!, animated: true, completion: nil)
+//    }
 }
