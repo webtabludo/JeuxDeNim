@@ -74,7 +74,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if let nbrLigneSelect = Int(lignTextField.text!) {
             if let nbreAluSelect = Int(nbreAllumetteTextField.text!) {
                 
-                // Il faut vérifier qu'il reste assez d'alumettes
                 
                 if brain.countAlumettesDansLigne(tab: listeArray, nbrLigneSelect: nbrLigneSelect) >=  nbreAluSelect && nbreAluSelect <= AllMax {
                     listeArray = brain.effaceAlumettes(tab: listeArray, nbrAlumetteSelect: nbreAluSelect,nbrLigneSelect: nbrLigneSelect)
@@ -98,6 +97,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         self.réactualisationPyramide(tab: self.listeArray)
 
                         self.messageLabel.text = "A vous de jouer ..."
+                        self.lignTextField.text = ""
+                        self.nbreAllumetteTextField.text = ""
                         somme = self.brainIA.totalAll(tab: self.listeArray)
                         print("somme:\(somme)")
                         if somme == 1 {

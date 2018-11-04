@@ -22,8 +22,13 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         nbrLigneTextField.delegate = self
         nbrAllMaxTextField.delegate = self
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        nbrLigneTextField.text = ""
+        nbrAllMaxTextField.text = ""
+    }
     
     func testNbrLigne (nbreLigne: Int) {
         nbrLigne = nbreLigne
