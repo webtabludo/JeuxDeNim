@@ -32,18 +32,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
         pyramide = brain.creationPyramide(nbreDeLignes: lignes).chaineCaractere
         listeArray = brain.creationPyramide(nbreDeLignes: lignes).tableaux
         zoneTextView.text = pyramide
-        
-        
-
+ 
+    }
+    // Fonction de réactualisation de la pyramide
+    
+    func réactualisationPyramide (tab: [[Character]]) {
+        let newArr = brain.miseAPlat(tab: listeArray)
+        pyramide = String(newArr)
+        zoneTextView.text = pyramide
     }
     
      func aiPlay(tab: [[Character]], choixAllMax: Int)  {
         
        listeArray = brainIA.choixIA(tab: listeArray, choixAllMax: AllMax)
         
-        let newArr = brain.miseAPlat(tab: listeArray)
-        pyramide = String(newArr)
-        zoneTextView.text = pyramide
+        
     }
     
     
@@ -63,7 +66,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func validerAction(_ sender: UIButton) {
         
+        
         messageLabel.text = "Choisir une ligne et un nombre d'alumette"
+        
+        
         
         if let nbrLigneSelect = Int(lignTextField.text!) {
             if let nbreAluSelect = Int(nbreAllumetteTextField.text!) {
@@ -72,32 +78,64 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 if brain.countAlumettesDansLigne(tab: listeArray, nbrLigneSelect: nbrLigneSelect) >=  nbreAluSelect && nbreAluSelect <= AllMax {
                     listeArray = brain.effaceAlumettes(tab: listeArray, nbrAlumetteSelect: nbreAluSelect,nbrLigneSelect: nbrLigneSelect)
-                    messageLabel.text = "A moi de jouer ..."
+                    réactualisationPyramide(tab: listeArray)
 
-                    let newArr = brain.miseAPlat(tab: listeArray)
-                   pyramide = String(newArr)
-                    zoneTextView.text = pyramide
+                    var somme = brainIA.totalAll(tab: listeArray)
                     
+                       if somme == 1 {
+                        print("vous avez gagné")
+                        alerte(winner: "vous avez gagné")
+                    } else {
+                    
+                    messageLabel.text = "A moi de jouer ..."
+                    
+
                     
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-
+                        
                         self.aiPlay(tab: self.listeArray, choixAllMax: self.AllMax)
-                        self.messageLabel.text = "A vous de jouer ..."
+                        self.réactualisationPyramide(tab: self.listeArray)
 
+                        self.messageLabel.text = "A vous de jouer ..."
+                        somme = self.brainIA.totalAll(tab: self.listeArray)
+                        print("somme:\(somme)")
+                        if somme == 1 {
+                            print("j'ai gagné")
+                            self.alerte(winner: "j'ai gagné")
+                        }
                     }
-                    
+                       
+                    }
                    
                 } else {
                     messageLabel.text = "Il ne reste pas assez d'alumettes ou le nombre max est dépassé"
                 }
             }
         }
+       
+            
+        
     }
     
-     // Fonction retour à la first view
-//    func reload() {
-//        let viewControllerYouWantToPresent = storyboard?.instantiateViewController(withIdentifier: "FirstViewController")
-//        self.present(viewControllerYouWantToPresent!, animated: true, completion: nil)
-//    }
+    
+
+    // Fonction popup Alert fin de jeu
+    
+    func alerte(winner: String) {
+        
+        
+        
+        let alert = UIAlertController(title: "Game Over", message: winner, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(ok)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+
+
+
 }
+

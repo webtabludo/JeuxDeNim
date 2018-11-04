@@ -38,7 +38,7 @@ class BrainIA {
         var laLigne:[Character] = []
         
         for index in 1...tab.count {
-            laLigne = tab[index - 1]
+            laLigne = tab[index-1]
             
             result.append(laLigne.count - 1)
         }
@@ -47,8 +47,15 @@ class BrainIA {
     }
     
     
+    // Fonction qui compte le nombre total d'allumettes restantes
     
-    
+    func totalAll (tab: [[Character]]) -> Int {
+        var somme = 0
+        somme = countLignes(tab: tab).reduce(0, { x, y in
+            x + y
+        })
+    return somme
+    }
     
     // Tester chaque ligne pour savoir si la quantité d'allumette transformée en binaire est pair ou impair
     
@@ -80,13 +87,14 @@ class BrainIA {
     
     
     // Fonction efface alumettes
-    func effaceAlumettes(tab: [[Character]], choixAllMax: Int, indexDeLigne: Int, nbrAllLigne: Int) -> [[Character]] {
+    func effaceAlumettes(tab: [[Character]], choixAllMax: Int, indexDeLigne: Int, nbrAllLigne: Int, nbrTotAll: Int) -> [[Character]] {
         
         var listeArray: [[Character]] = tab
         var laLigne = tab[indexDeLigne]
         var y = 1
         var x = 1
         
+        if nbrTotAll > nbrAllLigne {
         for (_, char) in laLigne.enumerated() {
             if char == "l" && y <= choixAllMax && x <= nbrAllLigne {
                 laLigne.remove(at: 0)
@@ -99,7 +107,21 @@ class BrainIA {
         }
         listeArray.remove(at: indexDeLigne)
         listeArray.insert(laLigne, at: indexDeLigne)
-        
+        } else {
+            for (_, char) in laLigne.enumerated() {
+                if char == "l" && y <= choixAllMax && x <= nbrAllLigne - 1 {
+                    laLigne.remove(at: 0)
+                    y += 1
+                    x += 1
+                    
+                } else {
+                    print("plus d'allumettes pour IA")
+                }
+            }
+            listeArray.remove(at: indexDeLigne)
+            listeArray.insert(laLigne, at: indexDeLigne)
+
+        }
         return listeArray
     }
     
@@ -110,21 +132,23 @@ class BrainIA {
     func choixIA (tab: [[Character]], choixAllMax: Int) -> [[Character]] {
         
         let tabQuant = countLignes(tab: tab)
-        
+        print("countlignes:\(tabQuant)")
         var listeArray: [[Character]] = tab
         var y = 0
         var x = 1
         var isPair = false
+        let somme = totalAll(tab: tab)
+        
         for (i,chiffre) in tabQuant.enumerated() {
             
             isPair = parité(num: chiffre)
           
             
             if isPair == false && y < 1 {
-                listeArray = effaceAlumettes(tab: tab, choixAllMax: choixAllMax, indexDeLigne: i, nbrAllLigne: chiffre)
+                listeArray = effaceAlumettes(tab: tab, choixAllMax: choixAllMax, indexDeLigne: i, nbrAllLigne: chiffre, nbrTotAll: somme)
                 y += 1
                 x += 1
-               
+                
                 
             } else if (isPair == true && x < tabQuant.count) {
               
@@ -136,7 +160,7 @@ class BrainIA {
         
         if listeArray == tab {
             for (i,chiffre) in tabQuant.enumerated() {
-                listeArray = effaceAlumettes(tab: tab, choixAllMax: 1, indexDeLigne: i, nbrAllLigne: chiffre)
+                listeArray = effaceAlumettes(tab: tab, choixAllMax: 1, indexDeLigne: i, nbrAllLigne: chiffre, nbrTotAll: somme)
                 
             }
             
