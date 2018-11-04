@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var zoneTextView: UILabel!
     @IBOutlet weak var lignTextField: UITextField!
     @IBOutlet weak var nbreAllumetteTextField: UITextField!
+    @IBOutlet weak var numerotationLabel: UILabel!
     
     var AllMax:Int = 0
     var lignes: Int = 0
@@ -32,8 +33,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         pyramide = brain.creationPyramide(nbreDeLignes: lignes).chaineCaractere
         listeArray = brain.creationPyramide(nbreDeLignes: lignes).tableaux
         zoneTextView.text = pyramide
- 
+        numerotationLabel.text = numérotation(nbreDeLigne: lignes)
     }
+    
+    // Fonction création de la numérotation
+    
+    func numérotation(nbreDeLigne: Int) -> String {
+        var str = ""
+        for i in 1...nbreDeLigne {
+            str.append(String(i) + "\n")
+        }
+        return str
+    }
+    
     // Fonction de réactualisation de la pyramide
     
     func réactualisationPyramide (tab: [[Character]]) {

@@ -154,14 +154,20 @@
                                     <action selector="validerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8q6-jO-UHe"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sje-LL-2kU">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="366"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sje-LL-2kU">
+                                <rect key="frame" x="35" y="10" width="340" height="366"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="366" id="0UB-q6-xjN"/>
-                                    <constraint firstAttribute="width" constant="375" id="9uB-c4-kIr"/>
+                                    <constraint firstAttribute="width" constant="340" id="9uB-c4-kIr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OFE-VR-Nb2">
+                                <rect key="frame" x="0.0" y="10" width="39" height="366"/>
+                                <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="60"/>
+                                <color key="textColor" red="1" green="0.21877737899999999" blue="0.23666798110000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -175,10 +181,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pos-VN-XSd" secondAttribute="trailing" constant="110" id="EKZ-Ey-FHC"/>
                             <constraint firstAttribute="trailing" secondItem="sje-LL-2kU" secondAttribute="trailing" id="JYX-xi-P9K"/>
                             <constraint firstItem="4PF-wc-dFU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QUy-V3-6ol"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OFE-VR-Nb2" secondAttribute="trailing" constant="336" id="SKj-Qh-8Jh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Ne-f2-yMH" secondAttribute="trailing" constant="10" id="UZa-p0-TdX"/>
-                            <constraint firstItem="8Ne-f2-yMH" firstAttribute="top" secondItem="sje-LL-2kU" secondAttribute="bottom" constant="27" id="WWd-Zo-EDt"/>
-                            <constraint firstItem="sje-LL-2kU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="oSJ-W5-KWc"/>
-                            <constraint firstItem="sje-LL-2kU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vLK-br-g3n"/>
+                            <constraint firstItem="8Ne-f2-yMH" firstAttribute="top" secondItem="sje-LL-2kU" secondAttribute="bottom" constant="17" id="WWd-Zo-EDt"/>
+                            <constraint firstItem="OFE-VR-Nb2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ekT-mL-0EN"/>
+                            <constraint firstItem="sje-LL-2kU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="35" id="oSJ-W5-KWc"/>
+                            <constraint firstItem="8Ne-f2-yMH" firstAttribute="top" secondItem="OFE-VR-Nb2" secondAttribute="bottom" constant="17" id="qhP-Bp-Pds"/>
+                            <constraint firstItem="OFE-VR-Nb2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="10" id="uOI-QF-xQI"/>
+                            <constraint firstItem="sje-LL-2kU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="10" id="vLK-br-g3n"/>
                             <constraint firstItem="8Ne-f2-yMH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="y4g-Da-BGr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pos-VN-XSd" secondAttribute="bottom" constant="50" id="zrN-mu-gPD"/>
                         </constraints>
@@ -188,6 +198,7 @@
                         <outlet property="lignTextField" destination="4PF-wc-dFU" id="n3b-Es-0wg"/>
                         <outlet property="messageLabel" destination="8Ne-f2-yMH" id="Juh-Js-sn3"/>
                         <outlet property="nbreAllumetteTextField" destination="RQw-t9-UW7" id="YKF-Wu-TGv"/>
+                        <outlet property="numerotationLabel" destination="OFE-VR-Nb2" id="9H2-pm-Jh9"/>
                         <outlet property="zoneTextView" destination="sje-LL-2kU" id="lBB-Fu-UeY"/>
                     </connections>
                 </viewController>
