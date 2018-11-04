@@ -23,7 +23,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var brain = Brain(unNombreDeLigne: 0, unNombreAlumettes: 0)
     var listeArray:[[Character]] = []
     var brainIA = BrainIA()
-    
+    var listeArrayLate:[[Character]] = []
+    var pyramideLate = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,13 +47,60 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         return str
     }
+//    // ici
+//    // Fonction pour trouver les différences entre deux string
+//
+//    func findDifference (str1: String, str2: String) -> [String] {
+//
+//        let strOldArray = str1.components(separatedBy: "\n")
+//
+//        let strNewArray = str2.components(separatedBy: "\n")
+//
+//
+//        let newWorld = ""
+//        var newArray:[String] = []
+//
+//
+//
+//        for (val1, val2) in zip(strOldArray, strNewArray) {
+//            print("val1:\(val1) et val2:\(val2)")
+//            if val1 == val2 {
+//
+//                newArray.append(val1)
+//
+//            } else {
+//
+//                let x = val1.count
+//                let y = val2.count
+//                print(x)
+//                let ajout = String(repeating: "X", count: (x - y))
+//                newArray.append(val2 + ajout)
+//            }
+//
+//        }
+//        print(newArray)
+//        return newArray
+//    }
+//    //ici
     
     // Fonction de réactualisation de la pyramide
     
     func réactualisationPyramide (tab: [[Character]]) {
+//        //ici
+//        let newArrLate = brain.miseAPlat(tab: listeArrayLate)
+//        pyramideLate = String(newArrLate)
+//        let pyramideTempo = findDifference(str1: pyramideLate, str2: pyramide)
+//        zoneTextView.text = pyramideTempo.joined(separator: "\n")
+//
+//
+//        //ici
+//
+        
         let newArr = brain.miseAPlat(tab: listeArray)
         pyramide = String(newArr)
         zoneTextView.text = pyramide
+        
+  
     }
     
      func aiPlay(tab: [[Character]], choixAllMax: Int)  {
@@ -88,6 +137,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 
                 if brain.countAlumettesDansLigne(tab: listeArray, nbrLigneSelect: nbrLigneSelect) >=  nbreAluSelect && nbreAluSelect <= AllMax {
+//                    //ici
+//                    listeArrayLate = listeArray
+//                    //ici
                     listeArray = brain.effaceAlumettes(tab: listeArray, nbrAlumetteSelect: nbreAluSelect,nbrLigneSelect: nbrLigneSelect)
                     réactualisationPyramide(tab: listeArray)
 
@@ -102,7 +154,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     
 
                     
-                    
+//                        //ici
+//                        listeArrayLate = listeArray
+//                        //ici
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         
                         self.aiPlay(tab: self.listeArray, choixAllMax: self.AllMax)
