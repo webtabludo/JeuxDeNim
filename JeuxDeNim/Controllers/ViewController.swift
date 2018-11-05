@@ -6,6 +6,24 @@
 //  Copyright © 2018 ludo iMac. All rights reserved.
 //
 
+
+// Faire apparaitre le text en fondu
+extension UIView {
+    func fadeTransition(_ duration:CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.fade
+        animation.duration = duration
+        layer.add(animation, forKey: CATransitionType.fade.rawValue)
+    }
+}
+
+
+
+
+
+
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
@@ -32,11 +50,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         lignTextField.delegate = self
         nbreAllumetteTextField.delegate = self
         
+        listeArrayLate = listeArray
+        
         pyramide = brain.creationPyramide(nbreDeLignes: lignes).chaineCaractere
         listeArray = brain.creationPyramide(nbreDeLignes: lignes).tableaux
         zoneTextView.text = pyramide
         numerotationLabel.text = numérotation(nbreDeLigne: lignes)
     }
+ 
+    
     
     // Fonction création de la numérotation
     
@@ -47,60 +69,68 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         return str
     }
-//    // ici
-//    // Fonction pour trouver les différences entre deux string
-//
-//    func findDifference (str1: String, str2: String) -> [String] {
-//
-//        let strOldArray = str1.components(separatedBy: "\n")
-//
-//        let strNewArray = str2.components(separatedBy: "\n")
-//
-//
-//        let newWorld = ""
-//        var newArray:[String] = []
-//
-//
-//
-//        for (val1, val2) in zip(strOldArray, strNewArray) {
-//            print("val1:\(val1) et val2:\(val2)")
-//            if val1 == val2 {
-//
-//                newArray.append(val1)
-//
-//            } else {
-//
-//                let x = val1.count
-//                let y = val2.count
-//                print(x)
-//                let ajout = String(repeating: "X", count: (x - y))
-//                newArray.append(val2 + ajout)
-//            }
-//
-//        }
-//        print(newArray)
-//        return newArray
-//    }
-//    //ici
+
+    // Fonction pour trouver les différences entre deux string
+    func findDifference (str1: String, str2: String) -> String {
+        
+        let strOldArray = str1.components(separatedBy: "\n")
+        print("strOldArray:\(strOldArray)")
+        let strNewArray = str2.components(separatedBy: "\n")
+        print("strNewArray:\(strNewArray)")
+        
+        var newWorld = ""
+        var newArray:[String] = []
+        
+        
+        
+        for (val1, val2) in zip(strOldArray, strNewArray) {
+            
+            if val1 == val2 {
+                
+                newArray.append(val1)
+                
+            } else {
+                
+                let x = val1.count
+                let y = val2.count
+               
+                let ajout = String(repeating: "X", count: (x - y))
+                newArray.append(val2 + ajout)
+            }
+            
+        }
+        
+        newWorld = newArray.joined(separator: "\n")
+        print("newWorld:\(newWorld)")
+        return newWorld
+    }
+
     
     // Fonction de réactualisation de la pyramide
     
     func réactualisationPyramide (tab: [[Character]]) {
-//        //ici
-//        let newArrLate = brain.miseAPlat(tab: listeArrayLate)
-//        pyramideLate = String(newArrLate)
-//        let pyramideTempo = findDifference(str1: pyramideLate, str2: pyramide)
-//        zoneTextView.text = pyramideTempo.joined(separator: "\n")
-//
-//
-//        //ici
-//
-        
+       
+        let newArrLate = brain.miseAPlat(tab: listeArrayLate)
+        print("newArrLate:\(newArrLate)")
+        pyramideLate = String(newArrLate)
+     
+
         let newArr = brain.miseAPlat(tab: listeArray)
         pyramide = String(newArr)
-        zoneTextView.text = pyramide
         
-  
+        print("pyrlate:\(pyramideLate)")
+        print("pyra:\(pyramide)")
+        let pyramideTempo = findDifference(str1: pyramideLate, str2: pyramide)
+        zoneTextView.fadeTransition(0.4)
+        zoneTextView.text = pyramideTempo
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+            self.zoneTextView.fadeTransition(0.4)
+            self.zoneTextView.text = self.pyramide
+            
+        }
+
+        
+      
     }
     
      func aiPlay(tab: [[Character]], choixAllMax: Int)  {
@@ -126,8 +156,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func validerAction(_ sender: UIButton) {
-        
-        
+
+        listeArrayLate = listeArray
+
         messageLabel.text = "Choisir une ligne et un nombre d'alumette"
         
         
@@ -137,9 +168,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 
                 if brain.countAlumettesDansLigne(tab: listeArray, nbrLigneSelect: nbrLigneSelect) >=  nbreAluSelect && nbreAluSelect <= AllMax {
-//                    //ici
-//                    listeArrayLate = listeArray
-//                    //ici
+
                     listeArray = brain.effaceAlumettes(tab: listeArray, nbrAlumetteSelect: nbreAluSelect,nbrLigneSelect: nbrLigneSelect)
                     réactualisationPyramide(tab: listeArray)
 
@@ -151,22 +180,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     } else {
                     
                     messageLabel.text = "A moi de jouer ..."
-                    
 
-                    
-//                        //ici
-//                        listeArrayLate = listeArray
-//                        //ici
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        listeArrayLate = listeArray
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         
                         self.aiPlay(tab: self.listeArray, choixAllMax: self.AllMax)
                         self.réactualisationPyramide(tab: self.listeArray)
-
                         self.messageLabel.text = "A vous de jouer ..."
                         self.lignTextField.text = ""
                         self.nbreAllumetteTextField.text = ""
                         somme = self.brainIA.totalAll(tab: self.listeArray)
-                        print("somme:\(somme)")
                         if somme == 1 {
                             print("j'ai gagné")
                             self.alerte(winner: "j'ai gagné")
