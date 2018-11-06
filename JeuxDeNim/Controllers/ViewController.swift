@@ -74,9 +74,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func findDifference (str1: String, str2: String) -> String {
         
         let strOldArray = str1.components(separatedBy: "\n")
-        print("strOldArray:\(strOldArray)")
+        
         let strNewArray = str2.components(separatedBy: "\n")
-        print("strNewArray:\(strNewArray)")
+        
         
         var newWorld = ""
         var newArray:[String] = []
@@ -101,7 +101,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         newWorld = newArray.joined(separator: "\n")
-        print("newWorld:\(newWorld)")
+        
         return newWorld
     }
 
@@ -111,15 +111,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func réactualisationPyramide (tab: [[Character]]) {
        
         let newArrLate = brain.miseAPlat(tab: listeArrayLate)
-        print("newArrLate:\(newArrLate)")
+       
         pyramideLate = String(newArrLate)
      
 
         let newArr = brain.miseAPlat(tab: listeArray)
         pyramide = String(newArr)
         
-        print("pyrlate:\(pyramideLate)")
-        print("pyra:\(pyramide)")
+       
         let pyramideTempo = findDifference(str1: pyramideLate, str2: pyramide)
         zoneTextView.fadeTransition(0.4)
         zoneTextView.text = pyramideTempo
@@ -187,7 +186,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         
                         self.aiPlay(tab: self.listeArray, choixAllMax: self.AllMax)
                         self.réactualisationPyramide(tab: self.listeArray)
-                        self.messageLabel.text = "A vous de jouer ..."
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                            self.messageLabel.text = "A vous de jouer ..."
+                        }
                         self.lignTextField.text = ""
                         self.nbreAllumetteTextField.text = ""
                         somme = self.brainIA.totalAll(tab: self.listeArray)
@@ -195,7 +197,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             print("j'ai gagné")
                             self.alerte(winner: "j'ai gagné")
                         }
-                    }
+                        }
                        
                     }
                    

@@ -54,7 +54,7 @@ class BrainIA {
         somme = countLignes(tab: tab).reduce(0, { x, y in
             x + y
         })
-    return somme
+        return somme
     }
     
     // Tester chaque ligne pour savoir si la quantité d'allumette transformée en binaire est pair ou impair
@@ -95,18 +95,19 @@ class BrainIA {
         var x = 1
         
         if nbrTotAll > nbrAllLigne {
-        for (_, char) in laLigne.enumerated() {
-            if char == "l" && y <= choixAllMax && x <= nbrAllLigne {
-                laLigne.remove(at: 0)
-                y += 1
-                x += 1
+            for (_, char) in laLigne.enumerated() {
                
-            } else {
-                  print("plus d'allumettes pour IA")
+                if char == "l" && y <= choixAllMax && x <= nbrAllLigne {
+                    laLigne.remove(at: 0)
+                    y += 1
+                    x += 1
+                    
+                } else {
+                    print("plus d'allumettes pour IA")
+                }
             }
-        }
-        listeArray.remove(at: indexDeLigne)
-        listeArray.insert(laLigne, at: indexDeLigne)
+            listeArray.remove(at: indexDeLigne)
+            listeArray.insert(laLigne, at: indexDeLigne)
         } else {
             for (_, char) in laLigne.enumerated() {
                 if char == "l" && y <= choixAllMax && x <= nbrAllLigne - 1 {
@@ -120,7 +121,7 @@ class BrainIA {
             }
             listeArray.remove(at: indexDeLigne)
             listeArray.insert(laLigne, at: indexDeLigne)
-
+            
         }
         return listeArray
     }
@@ -132,7 +133,6 @@ class BrainIA {
     func choixIA (tab: [[Character]], choixAllMax: Int) -> [[Character]] {
         
         let tabQuant = countLignes(tab: tab)
-        print("countlignes:\(tabQuant)")
         var listeArray: [[Character]] = tab
         var y = 0
         var x = 1
@@ -142,32 +142,37 @@ class BrainIA {
         for (i,chiffre) in tabQuant.enumerated() {
             
             isPair = parité(num: chiffre)
-          
             
-            if isPair == false && y < 1 {
+            
+            if isPair == false && y < 1 && x < tabQuant.count {
+               
                 listeArray = effaceAlumettes(tab: tab, choixAllMax: choixAllMax, indexDeLigne: i, nbrAllLigne: chiffre, nbrTotAll: somme)
                 y += 1
                 x += 1
                 
                 
-            } else if (isPair == true && x < tabQuant.count) {
-              
+            } else if isPair == true && x < tabQuant.count - 1 && y < 1 {
+                
                 x += 1
                 
-            }
-            
-        }
-        
-        if listeArray == tab {
-            for (i,chiffre) in tabQuant.enumerated() {
-                listeArray = effaceAlumettes(tab: tab, choixAllMax: 1, indexDeLigne: i, nbrAllLigne: chiffre, nbrTotAll: somme)
+            } else if y < 1 {
+              
+                for (i,chiffre) in tabQuant.enumerated() {
+                    var z = 1
+                    var w = 0
+                    
+                    if z < tabQuant.count && w < 1 && tabQuant[i] != 0 {
+                        listeArray = effaceAlumettes(tab: tab, choixAllMax: choixAllMax, indexDeLigne: i, nbrAllLigne: chiffre, nbrTotAll: somme)
+                        z += 1
+                        w += 1
+                    }
+                }
                 
             }
-            
         }
         return listeArray
     }
-
+    
 }
 
 
